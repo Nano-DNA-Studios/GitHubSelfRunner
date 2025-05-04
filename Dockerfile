@@ -30,6 +30,7 @@ EXPOSE 8080
 
 # Final command to run
 CMD ["/bin/bash", "-c", "\
+mkdir /GitHubSelfRunner/Cache/OutputLogs && \
 /GitHubSelfRunner/GitHubSelfRunner registerpat \"$GitHubPAT\" && \
 /GitHubSelfRunner/GitHubSelfRunner registerserver \"$Secret\" \"$DefaultImage\" 8080 /GitHubSelfRunner/Cache/OutputLogs && \
 /GitHubSelfRunner/GitHubSelfRunner startserver"]
