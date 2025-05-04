@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Configuraton
-GitHubPAT="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"
-Secret="CLIWebhook"
-DefaultImage="mrdnalex/github-action-worker-container-dotnet"
-OutputDir="C:\Users\MrDNA\Downloads\GitHubSelfRunnerCache"
+GitHubPAT=""
+Secret=""
+DefaultImage=""
+OutputDir=""
 DockerImage="ghcr.io/nano-dna-studios/githubselfrunner-server:latest"
 OutputPort=8080
 
