@@ -162,6 +162,8 @@ jobs:
   upload-scripts:
     runs-on: ["self-hosted", "run-${{github.run_id}}"]
     needs: [build-nuget]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Upload Scripts to Release
         shell: bash
