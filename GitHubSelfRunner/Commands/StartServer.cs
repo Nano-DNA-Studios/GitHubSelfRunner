@@ -102,6 +102,7 @@ namespace GitHubSelfRunner.Commands
             Console.WriteLine("Webhook Server Started!");
 
             webhookService.Start(settings.WebhookServerPort, true);
+
         }
 
         /// <summary>
