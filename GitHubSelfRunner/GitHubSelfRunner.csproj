@@ -37,7 +37,7 @@
 	<!-- NuGet Package References -->
 	<ItemGroup>
 		<PackageReference Include="NanoDNA.CLIFramework" Version="0.2.0" Condition="'$(UseProjectReference)' == 'false'" />
-		<PackageReference Include="NanoDNA.GitHubManager" Version="0.2.0" Condition="'$(UseProjectReference)' == 'false'" />
+		<PackageReference Include="NanoDNA.GitHubManager" Version="0.2.1" Condition="'$(UseProjectReference)' == 'false'" />
 	</ItemGroup>
 
 	<!-- Scripts Folder-->
@@ -51,6 +51,7 @@
 		<None Include="..\README.md" Link="Docs\README.md" />
 		<None Include="..\Directory.Build.props" Link="Docs\Directory.Build.props" />
 		<None Include="..\LICENSE" Link="Docs\LICENSE" />
+		<None Include="..\Dockerfile" Link="Docs\Dockerfile" />
 
 		<!-- Workflow Scripts -->
 		<None Include="..\.github\workflows\build.yml" Link="Workflows\build.yml" />
