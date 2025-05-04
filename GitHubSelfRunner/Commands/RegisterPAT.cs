@@ -1,9 +1,9 @@
-﻿using GitHubAPICLI.Application;
+﻿using GitHubSelfRunner.Application;
 using NanoDNA.CLIFramework.Commands;
 using NanoDNA.CLIFramework.Data;
 using System;
 
-namespace GitHubAPICLI.Commands
+namespace GitHubSelfRunner.Commands
 {
     /// <summary>
     /// Registers the GitHub Personal Access Token (PAT) for the application.
