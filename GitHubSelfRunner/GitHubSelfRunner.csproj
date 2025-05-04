@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<!-- Project Reference Conditionals -->
+	<PropertyGroup>
+		<UseProjectReference Condition="'$(Configuration)' == 'Debug' and '$(RepositoryName)' == 'GitHubAPICLI-Solution'">true</UseProjectReference>
+		<UseProjectReference Condition="'$(Configuration)' == 'Release' or '$(RepositoryName)' == ''">false</UseProjectReference>
+	</PropertyGroup>
+
+	<!-- Building / Publishing Metadata -->
+	<PropertyGroup>
+		<RootNamespace>GitHubSelfRunner</RootNamespace>
+		<ProductName>$(RootNamespace)</ProductName>
+		<PackageId>$(RootNamespace)</PackageId>
+		<AssemblyName>$(RootNamespace)</AssemblyName>
+		<OutputType>Exe</OutputType>
+		<IsPackable>true</IsPackable>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>ghrunner</ToolCommandName>
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<!-- Add Individual Platforms in NuGet Package -->
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<None Include="..\README.md" Pack="true" PackagePath="" />
+		<None Include="bin\x64\Release\net*\$(AssemblyName).exe" Pack="true" PackagePath="runtimes\win-x64\lib" />
+		<None Include="bin\x64\Release\net*\$(AssemblyName).xml" Pack="true" PackagePath="runtimes\win-x64\lib" />
+		<None Include="bin\x86\Release\net*\$(AssemblyName).exe" Pack="true" PackagePath="runtimes\win-x86\lib" />
+		<None Include="bin\x86\Release\net*\$(AssemblyName).xml" Pack="true" PackagePath="runtimes\win-x86\lib" />
+	</ItemGroup>
+
+	<!-- Development Project References -->
+	<ItemGroup Condition="'$(UseProjectReference)' == 'true'">
+		<ProjectReference Include="..\..\CLIFramework\CLIFramework\CLIFramework.csproj" />
+		<ProjectReference Include="..\..\GitHubManager\GitHubManager\GitHubManager.csproj" />
+	</ItemGroup>
+
+	<!-- NuGet Package References -->
+	<ItemGroup>
+		<PackageReference Include="NanoDNA.CLIFramework" Version="0.2.0" Condition="'$(UseProjectReference)' == 'false'" />
+		<PackageReference Include="NanoDNA.GitHubManager" Version="0.2.1" Condition="'$(UseProjectReference)' == 'false'" />
+	</ItemGroup>
+
+	<!-- Scripts Folder-->
+	<ItemGroup>
+		<Folder Include="Scripts\" />
+	</ItemGroup>
+
+	<!-- Include Items to Edit -->
+	<ItemGroup>
+		<!-- Project Documents -->
+		<None Include="..\README.md" Link="Docs\README.md" />
+		<None Include="..\Directory.Build.props" Link="Docs\Directory.Build.props" />
+		<None Include="..\LICENSE" Link="Docs\LICENSE" />
+		<None Include="..\Dockerfile" Link="Docs\Dockerfile" />
+
+		<!-- Workflow Scripts -->
+		<None Include="..\.github\workflows\build.yml" Link="Workflows\build.yml" />
+		<None Include="..\.github\workflows\publish.yml" Link="Workflows\publish.yml" />
+		<None Include="..\.github\workflows\test.yml" Link="Workflows\test.yml" />
+	</ItemGroup>
+
+</Project>
