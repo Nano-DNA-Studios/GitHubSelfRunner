@@ -1,10 +1,10 @@
-﻿using GitHubSelfRunner.Application;
+﻿using GitHubAPICLI.Application;
 using NanoDNA.CLIFramework.Commands;
 using NanoDNA.CLIFramework.Data;
 using System;
 using System.IO;
 
-namespace GitHubSelfRunner.Commands
+namespace GitHubAPICLI.Commands
 {
     /// <summary>
     /// Registers the Info needed to Launch a new Webhook Server for GitHub Actions to be received
@@ -26,7 +26,7 @@ namespace GitHubSelfRunner.Commands
         /// <inheritdoc/>
         public override void Execute(string[] args)
         {
-            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
+            GitHubCLISettings settings = (GitHubCLISettings)DataManager.Settings;
 
             if (string.IsNullOrEmpty(settings.GitHubPAT))
             {
@@ -34,20 +34,19 @@ namespace GitHubSelfRunner.Commands
                 return;
             }
 
-            if (args.Length != 5)
+            if (args.Length != 4)
             {
-                Console.WriteLine("Invalid Number of Arguments Provided, the GitHub PAT, Webhook Secret, Default Docker Image, Port Number and the Logs Output for the Server must be specified");
+                Console.WriteLine("Invalid Number of Arguments Provided, the Webhook Secret, Default Docker Image, Port Number and the Logs Output for the Server must be specified");
                 return;
             }
 
             //Check if the Default Docker Image is a valid Docker Image
 
-            string githubPAT = args[0];
-            string webhookSecret = args[1];
-            string defaultDockerImage = args[2];
-            string logsOutput = args[4];
+            string webhookSecret = args[0];
+            string defaultDockerImage = args[1];
+            string logsOutput = args[3];
 
-            if (!int.TryParse(args[3], out int port))
+            if (!int.TryParse(args[2], out int port))
             {
                 Console.WriteLine("Invalid Port Number Provided");
                 return;
@@ -59,7 +58,6 @@ namespace GitHubSelfRunner.Commands
                 return;
             }
 
-            settings.SetGitHubPAT(githubPAT);
             settings.SetWebhookSecret(webhookSecret);
             settings.SetDefaultDockerImage(defaultDockerImage);
             settings.SetWebhookServerPort(port);
