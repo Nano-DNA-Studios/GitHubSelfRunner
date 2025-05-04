@@ -1,10 +1,10 @@
-﻿using GitHubAPICLI.Application;
+﻿using GitHubSelfRunner.Application;
 using NanoDNA.CLIFramework.Commands;
 using NanoDNA.CLIFramework.Data;
 using System;
 using System.IO;
 
-namespace GitHubAPICLI.Commands
+namespace GitHubSelfRunner.Commands
 {
     /// <summary>
     /// Registers the Info needed to Launch a new Webhook Server for GitHub Actions to be received
@@ -26,7 +26,7 @@ namespace GitHubAPICLI.Commands
         /// <inheritdoc/>
         public override void Execute(string[] args)
         {
-            GitHubCLISettings settings = (GitHubCLISettings)DataManager.Settings;
+            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
 
             if (string.IsNullOrEmpty(settings.GitHubPAT))
             {

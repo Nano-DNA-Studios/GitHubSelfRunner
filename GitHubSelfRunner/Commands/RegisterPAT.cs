@@ -31,7 +31,7 @@ namespace GitHubSelfRunner.Commands
                 return;
             }
 
-            GitHubCLISettings settings = (GitHubCLISettings)DataManager.Settings;
+            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
 
             settings.SetGitHubPAT(args[0]);
             settings.SaveSettings();

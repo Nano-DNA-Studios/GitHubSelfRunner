@@ -1,4 +1,4 @@
-﻿using GitHubAPICLI.Application;
+﻿using GitHubSelfRunner.Application;
 using NanoDNA.CLIFramework.Commands;
 using NanoDNA.CLIFramework.Data;
 using NanoDNA.GitHubManager;
@@ -9,7 +9,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace GitHubAPICLI.Commands
+namespace GitHubSelfRunner.Commands
 {
     /// <summary>
     /// Starts a Thread Blocking Webhooks Server for GitHub API Action Workflows
@@ -36,7 +36,7 @@ namespace GitHubAPICLI.Commands
         /// <inheritdoc/>
         public override void Execute(string[] args)
         {
-            GitHubCLISettings settings = (GitHubCLISettings)DataManager.Settings;
+            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
 
             if (string.IsNullOrEmpty(settings.GitHubPAT))
             {
@@ -80,7 +80,7 @@ namespace GitHubAPICLI.Commands
 
             webhookService.On<WorkflowRunEvent>(workflowRun =>
             {
-                settings = Setting.LoadSettings<GitHubCLISettings>();
+                settings = Setting.LoadSettings<GitHubSelfRunnerSettings>();
 
                 if (workflowRun == null)
                 {
@@ -108,7 +108,7 @@ namespace GitHubAPICLI.Commands
         /// <param name="workflowRun">Workflow Run Instance</param>
         private void AddRunner(WorkflowRun workflowRun)
         {
-            GitHubCLISettings settings = (GitHubCLISettings)DataManager.Settings;
+            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
 
             Repository repo = Repository.GetRepository(workflowRun.Repository.Owner.Login, workflowRun.Repository.Name);
 
@@ -146,7 +146,7 @@ namespace GitHubAPICLI.Commands
         /// <returns>The Docker Image to use</returns>
         private string GetDockerImage(Repository repo)
         {
-            GitHubCLISettings settings = (GitHubCLISettings)DataManager.Settings;
+            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
 
             ActionWorkerConfig config = settings.ActionWorkerConfigs.FirstOrDefault((config) => config.RepoName == repo.Name);
 
@@ -170,7 +170,7 @@ namespace GitHubAPICLI.Commands
         /// <param name="workflowRun">Workflow Run that is having it's Logs saved</param>
         private void SaveLogs(Repository repo, WorkflowRun workflowRun)
         {
-            GitHubCLISettings settings = (GitHubCLISettings)DataManager.Settings;
+            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
 
             WorkflowRun workRun = repo.GetWorkflows().FirstOrDefault((run) => run.ID == workflowRun.ID);
 
