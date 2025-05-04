@@ -30,5 +30,5 @@ CMD ["/bin/bash", "-c", "\
 mkdir -p /GitHubSelfRunner/Cache/OutputLogs && \
 /GitHubSelfRunner/GitHubSelfRunner registerpat \"$GitHubPAT\" && \
 /GitHubSelfRunner/GitHubSelfRunner registerserver \"$Secret\" \"$DefaultImage\" 8080 /GitHubSelfRunner/Cache/OutputLogs && \
-/GitHubSelfRunner/GitHubSelfRunner removerunner
+/GitHubSelfRunner/GitHubSelfRunner removerunner && \
 /GitHubSelfRunner/GitHubSelfRunner startserver"]
