@@ -12,7 +12,6 @@ namespace GitHubSelfRunner.Application
         /// </summary>
         public GitHubSelfRunnerApplication() : base()
         {
-           // Console.WriteLine(JsonConvert.SerializeObject(this, Formatting.Indented));
         }
     }
 }
