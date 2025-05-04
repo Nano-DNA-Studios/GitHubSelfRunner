@@ -68,4 +68,4 @@ jobs:
     steps:
       - name: Build Docker Image
         shell: bash
-        run: docker build -t ghcr.io/nano-dna-studios/githubselfrunner .
+        run: docker build -t ghcr.io/nano-dna-studios/githubselfrunner:latest .
