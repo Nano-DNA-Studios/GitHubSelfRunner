@@ -20,7 +20,7 @@ apt-get update && \
 apt-get install -y aspnetcore-runtime-8.0
 
 # Copy your published app
-COPY ./GitHubSelfRunner/bin/Release/net8.0/linux-x64 /GitHubSelfRunner
+COPY ./GitHubSelfRunner/bin/Release/net8.0/linux-x64/publish /GitHubSelfRunner
 
 # Make sure OutputLogs exists
 RUN mkdir /GitHubSelfRunner/OutputLogs
