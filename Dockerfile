@@ -22,15 +22,12 @@ apt-get install -y aspnetcore-runtime-8.0
 # Copy your published app
 COPY ./GitHubSelfRunner/bin/Release/net8.0/linux-x64/publish /GitHubSelfRunner
 
-# Make sure OutputLogs exists
-RUN mkdir /GitHubSelfRunner/Cache/OutputLogs
-
 # Expose the 8080 Port for the Webhook Server
 EXPOSE 8080
 
 # Final command to run
 CMD ["/bin/bash", "-c", "\
-mkdir /GitHubSelfRunner/Cache/OutputLogs && \
+mkdir -p /GitHubSelfRunner/Cache/OutputLogs && \
 /GitHubSelfRunner/GitHubSelfRunner registerpat \"$GitHubPAT\" && \
 /GitHubSelfRunner/GitHubSelfRunner registerserver \"$Secret\" \"$DefaultImage\" 8080 /GitHubSelfRunner/Cache/OutputLogs && \
 /GitHubSelfRunner/GitHubSelfRunner startserver"]
