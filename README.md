@@ -40,9 +40,9 @@ Libraries :
 
 ## License
 ----
-Individuals can use the Tool under the MIT License
+Individuals can use the Tool and Docker Container under the MIT License
 
-Groups and or Companies consisting of 5 or more people can Contact MrDNAlex through the email ``Mr.DNAlex.2003@gmail.com`` to License the Tool for usage. 
+Groups and or Companies consisting of 5 or more people can Contact MrDNAlex through the email ``Mr.DNAlex.2003@gmail.com`` to License the Tool and Container for usage. 
 
 ## Support
 ----
