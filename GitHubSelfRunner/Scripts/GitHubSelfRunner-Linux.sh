@@ -5,7 +5,7 @@ GitHubPAT=""
 Secret=""
 DefaultImage=""
 OutputDir=""
-DockerImage="ghcr.io/nano-dna-studios/githubselfrunner-server:latest"
+DockerImage="ghcr.io/nano-dna-studios/githubselfrunner:latest"
 OutputPort=8080
 
 # Run the Container
