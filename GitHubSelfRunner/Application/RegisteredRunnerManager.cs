@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using NanoDNA.CLIFramework.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +34,7 @@ namespace GitHubSelfRunner.Application
         /// <param name="cachePath">Path to the CLI Applications Settings</param>
         public RegisteredRunnerManager(string cachePath)
         {
-            _CachePath = cachePath;
+            _CachePath = Setting.LoadSettings<GitHubSelfRunnerSettings>().CachePath;
             Console.WriteLine($"Cache Path: {_CachePath}");
             _RegisteredRunnersPath = Path.Combine(_CachePath, "RegisteredRunners.json");
             RegisteredRunners = Load();
