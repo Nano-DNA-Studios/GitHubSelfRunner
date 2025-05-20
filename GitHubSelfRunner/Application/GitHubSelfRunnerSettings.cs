@@ -46,8 +46,8 @@ namespace GitHubSelfRunner.Application
         /// <summary>
         /// List of Active Runners Registered by the Application
         /// </summary>
-        [JsonProperty("RegisteredRunners")]
-        public List<RegisteredRunner> RegisteredRunners { get; private set; } = new List<RegisteredRunner>();
+        //[JsonProperty("RegisteredRunners")]
+        //public List<RegisteredRunner> RegisteredRunners { get; private set; } = new List<RegisteredRunner>();
 
         /// <summary>
         /// List of Action Worker to Fill in A Repos Workflows
@@ -139,23 +139,23 @@ namespace GitHubSelfRunner.Application
         /// Adds a Registered Action Worker that has been Spawned by the CLI Application
         /// </summary>
         /// <param name="runner"></param>
-        public void AddRegisteredRunner(RegisteredRunner runner)
-        {
-            RegisteredRunners.Add(runner);
-        }
-
-        /// <summary>
-        /// Removes a Registered Action Worker that has been Spawned by the CLI Application once its been Unregistered
-        /// </summary>
-        /// <param name="runner">Registered Runner Instance Info to remove</param>
-        public void RemoveRegisteredRunner(RegisteredRunner runner)
-        {
-            if (!RegisteredRunners.Any((regRunner) => regRunner.RunnerID == runner.RunnerID && regRunner.RunnerName == runner.RunnerName))
-                return;
-
-            RegisteredRunner remRunner = RegisteredRunners.First((regRunner) => regRunner.RunnerID == runner.RunnerID && regRunner.RunnerName == runner.RunnerName);
-
-            RegisteredRunners.Remove(remRunner);
-        }
+        //public void AddRegisteredRunner(RegisteredRunner runner)
+        //{
+        //    RegisteredRunners.Add(runner);
+        //}
+        //
+        ///// <summary>
+        ///// Removes a Registered Action Worker that has been Spawned by the CLI Application once its been Unregistered
+        ///// </summary>
+        ///// <param name="runner">Registered Runner Instance Info to remove</param>
+        //public void RemoveRegisteredRunner(RegisteredRunner runner)
+        //{
+        //    if (!RegisteredRunners.Any((regRunner) => regRunner.RunnerID == runner.RunnerID && regRunner.RunnerName == runner.RunnerName))
+        //        return;
+        //
+        //    RegisteredRunner remRunner = RegisteredRunners.First((regRunner) => regRunner.RunnerID == runner.RunnerID && regRunner.RunnerName == runner.RunnerName);
+        //
+        //    RegisteredRunners.Remove(remRunner);
+        //}
     }
 }

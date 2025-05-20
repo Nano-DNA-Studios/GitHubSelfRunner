@@ -102,7 +102,6 @@ namespace GitHubSelfRunner.Commands
             Console.WriteLine("Webhook Server Started!");
 
             webhookService.Start(settings.WebhookServerPort, true);
-
         }
 
         /// <summary>
@@ -111,7 +110,7 @@ namespace GitHubSelfRunner.Commands
         /// <param name="workflowRun">Workflow Run Instance</param>
         private void AddRunner(WorkflowRun workflowRun)
         {
-            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
+            RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(DataManager.Settings.CachePath);
 
             Repository repo = Repository.GetRepository(workflowRun.Repository.Owner.Login, workflowRun.Repository.Name);
 
@@ -124,19 +123,19 @@ namespace GitHubSelfRunner.Commands
 
             runner.Start();
 
-            settings.AddRegisteredRunner(new RegisteredRunner(repo.Owner.Login, repo.Name, runner.ID, runner.Name));
+            runnerManager.AddRegisteredRunner(new RegisteredRunner(repo.Owner.Login, repo.Name, runner.ID, runner.Name));
 
             lock (threadLock)
-                settings.SaveSettings();
+                runnerManager.Save();
 
             Console.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Added Runner {runner.Name} ({runner.ID}) to {repo.FullName}");
 
             runner.StopRunner += (runnner) =>
             {
-                settings.RemoveRegisteredRunner(new RegisteredRunner(repo.Owner.Login, repo.Name, runner.ID, runner.Name));
+                runnerManager.RemoveRegisteredRunner(new RegisteredRunner(repo.Owner.Login, repo.Name, runner.ID, runner.Name));
 
                 lock (threadLock)
-                    settings.SaveSettings();
+                    runnerManager.Save();
 
                 Console.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Removed Runner {runner.Name} ({runner.ID}) to {repo.FullName}");
             };
@@ -149,7 +148,7 @@ namespace GitHubSelfRunner.Commands
         /// <returns>The Docker Image to use</returns>
         private string GetDockerImage(Repository repo)
         {
-            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
+            GitHubSelfRunnerSettings settings = Setting.LoadSettings<GitHubSelfRunnerSettings>();
 
             ActionWorkerConfig config = settings.ActionWorkerConfigs.FirstOrDefault((config) => config.RepoName == repo.Name);
 
@@ -173,7 +172,7 @@ namespace GitHubSelfRunner.Commands
         /// <param name="workflowRun">Workflow Run that is having it's Logs saved</param>
         private void SaveLogs(Repository repo, WorkflowRun workflowRun)
         {
-            GitHubSelfRunnerSettings settings = (GitHubSelfRunnerSettings)DataManager.Settings;
+            GitHubSelfRunnerSettings settings = Setting.LoadSettings<GitHubSelfRunnerSettings>();
 
             WorkflowRun workRun = repo.GetWorkflows().FirstOrDefault((run) => run.ID == workflowRun.ID);
 
