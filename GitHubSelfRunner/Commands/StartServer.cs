@@ -111,7 +111,6 @@ namespace GitHubSelfRunner.Commands
         private void AddRunner(WorkflowRun workflowRun)
         {
             string cachePath = Setting.LoadSettings<GitHubSelfRunnerSettings>().CachePath;
-            Console.WriteLine("Cache Path:" + cachePath);
             RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(cachePath);
 
             Repository repo = Repository.GetRepository(workflowRun.Repository.Owner.Login, workflowRun.Repository.Name);
