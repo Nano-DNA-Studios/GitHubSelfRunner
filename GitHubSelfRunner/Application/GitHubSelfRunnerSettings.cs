@@ -134,7 +134,6 @@ namespace GitHubSelfRunner.Application
             ActionWorkerConfigs.Add(worker);
         }
 
-
         /// <summary>
         /// Adds a Registered Action Worker that has been Spawned by the CLI Application
         /// </summary>
