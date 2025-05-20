@@ -110,7 +110,8 @@ namespace GitHubSelfRunner.Commands
         /// <param name="workflowRun">Workflow Run Instance</param>
         private void AddRunner(WorkflowRun workflowRun)
         {
-            RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(DataManager.Settings.CachePath);
+            string cachePath = Setting.LoadSettings<GitHubSelfRunnerSettings>().CachePath;
+            RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(cachePath);
 
             Repository repo = Repository.GetRepository(workflowRun.Repository.Owner.Login, workflowRun.Repository.Name);
 

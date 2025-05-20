@@ -91,7 +91,8 @@ namespace GitHubSelfRunner.Commands
         /// <param name="args">CLI Args inputted by the User</param>
         private void RemoveRunnerByID(string[] args)
         {
-            RegisteredRunnerManager registeredRunnerManager = new RegisteredRunnerManager(DataManager.Settings.CachePath);
+            string cachePath = Setting.LoadSettings<GitHubSelfRunnerSettings>().CachePath;
+            RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(cachePath);
 
             string repoOwner = args[0];
             string repoName = args[1];
@@ -112,8 +113,8 @@ namespace GitHubSelfRunner.Commands
                 return;
             }
 
-            if (registeredRunnerManager.RegisteredRunners.Any((regRunner) => regRunner.RepoName == repo.Name && regRunner.RepoOwner == repo.Owner.Login))
-                registeredRunnerManager.RemoveRegisteredRunner(new RegisteredRunner(repo.Owner.Login, repo.Name, runner.ID, runner.Name));
+            if (runnerManager.RegisteredRunners.Any((regRunner) => regRunner.RepoName == repo.Name && regRunner.RepoOwner == repo.Owner.Login))
+                runnerManager.RemoveRegisteredRunner(new RegisteredRunner(repo.Owner.Login, repo.Name, runner.ID, runner.Name));
 
             if (Docker.ContainerExists(runner.Name.ToLower()))
                 Docker.RemoveContainer(runner.Name.ToLower(), true);
@@ -127,7 +128,8 @@ namespace GitHubSelfRunner.Commands
         /// <param name="repo">Repository to Remove the Runners from</param>
         private void RemoveRepoRunners(Repository repo)
         {
-            RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(DataManager.Settings.CachePath);
+            string cachePath = Setting.LoadSettings<GitHubSelfRunnerSettings>().CachePath;
+            RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(cachePath);
 
             Runner[] runners = repo.GetRunners();
 
@@ -165,7 +167,8 @@ namespace GitHubSelfRunner.Commands
         /// </summary>
         private void RemoveRegisteredRunners()
         {
-            RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(DataManager.Settings.CachePath);
+            string cachePath = Setting.LoadSettings<GitHubSelfRunnerSettings>().CachePath;
+            RegisteredRunnerManager runnerManager = new RegisteredRunnerManager(cachePath);
 
             if (runnerManager.RegisteredRunners == null || runnerManager.RegisteredRunners.Count == 0)
             {
