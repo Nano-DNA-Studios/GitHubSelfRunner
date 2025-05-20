@@ -47,10 +47,10 @@ namespace GitHubSelfRunner.Application
         private List<RegisteredRunner> Load()
         {
             if (!File.Exists(_RegisteredRunnersPath))
-                File.WriteAllText(_RegisteredRunnersPath, JsonConvert.SerializeObject(this, Formatting.Indented));
+                File.WriteAllText(_RegisteredRunnersPath, JsonConvert.SerializeObject(RegisteredRunners, Formatting.Indented));
 
             string json = File.ReadAllText(_RegisteredRunnersPath);
-            return JsonConvert.DeserializeObject<RegisteredRunnerManager>(json).RegisteredRunners;
+            return JsonConvert.DeserializeObject<List<RegisteredRunner>>(json);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace GitHubSelfRunner.Application
         /// </summary>
         public void Save ()
         {
-            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(RegisteredRunners, Formatting.Indented);
             File.WriteAllText(_RegisteredRunnersPath, json);
         }
 
