@@ -35,7 +35,7 @@ namespace GitHubSelfRunner.Application
         public RegisteredRunnerManager(string cachePath)
         {
             _CachePath = cachePath;
-            Console.WriteLine($"Cache Path: {_CachePath}");
+            Console.WriteLine($"Cache Path In Class: {_CachePath}");
             _RegisteredRunnersPath = Path.Combine(_CachePath, "RegisteredRunners.json");
             RegisteredRunners = Load();
         }
