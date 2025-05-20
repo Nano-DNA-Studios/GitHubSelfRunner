@@ -43,9 +43,9 @@ namespace GitHubSelfRunner.Application
         [JsonProperty("WebhookServerPort")]
         public int WebhookServerPort { get; private set; }
 
-        /// <summary>
-        /// List of Active Runners Registered by the Application
-        /// </summary>
+        ///// <summary>
+        ///// List of Active Runners Registered by the Application
+        ///// </summary>
         //[JsonProperty("RegisteredRunners")]
         //public List<RegisteredRunner> RegisteredRunners { get; private set; } = new List<RegisteredRunner>();
 
