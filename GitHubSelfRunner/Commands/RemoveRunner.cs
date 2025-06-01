@@ -186,7 +186,15 @@ namespace GitHubSelfRunner.Commands
 
                 Repository repository = Repository.GetRepository(registeredRunner.RepoOwner, registeredRunner.RepoName);
 
-                if (repository.GetRunners().Any((runner) => runner.ID == registeredRunner.RunnerID) && !repository.TryRemoveRunner(registeredRunner.RunnerID))
+                Runner[] runners = repository.GetRunners();
+
+                if (runners == null || runners.Length == 0)
+                {
+                    Console.WriteLine($"No Runners Found in {repository.FullName} for Registered Runner {registeredRunner.RunnerName}(ID : {registeredRunner.RunnerID})");
+                    continue;
+                }
+
+                if (runners.Any((runner) => runner.ID == registeredRunner.RunnerID) && !repository.TryRemoveRunner(registeredRunner.RunnerID))
                 {
                     Console.WriteLine($"Failed to remove registered runner {registeredRunner.RunnerName} (ID : {registeredRunner.RunnerID}) from {repository.FullName}");
                     continue;
