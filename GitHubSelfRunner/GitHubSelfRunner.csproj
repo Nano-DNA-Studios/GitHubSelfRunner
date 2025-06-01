@@ -37,7 +37,7 @@
 	<!-- NuGet Package References -->
 	<ItemGroup>
 		<PackageReference Include="NanoDNA.CLIFramework" Version="0.2.0" Condition="'$(UseProjectReference)' == 'false'" />
-		<PackageReference Include="NanoDNA.GitHubManager" Version="0.2.1" Condition="'$(UseProjectReference)' == 'false'" />
+		<PackageReference Include="NanoDNA.GitHubManager" Version="0.2.2" Condition="'$(UseProjectReference)' == 'false'" />
 	</ItemGroup>
 
 	<!-- Scripts Folder-->
