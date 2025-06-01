@@ -185,7 +185,6 @@ namespace GitHubSelfRunner.Commands
                 currentRunner = registeredRunner;
 
                 Repository repository = Repository.GetRepository(registeredRunner.RepoOwner, registeredRunner.RepoName);
-
                 Runner[] runners = repository.GetRunners();
 
                 if (runners == null || runners.Length == 0)
