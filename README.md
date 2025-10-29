@@ -1,5 +1,5 @@
 # GitHubSelfRunner
-A CLI Tool dedicated to hosting a Endpoint Server for GitHub Webhooks related to GitHub Action Runners. The Server will listen for Webhooks from GitHub and Instantiate new GitHub Action Runners based on Repository demands. The Tool will automatically clean after itself once the Workflow is complete.
+A CLI Tool dedicated to hosting a server endpoint for GitHub Action Runner Webhooks. Once running, the server dynamically allocates ephemeral runners to complete requested GitHub Actions based on repository demands. Runners are automatically cleaned and disposed once actions are completed.
 
 # Requirements
 - .NET 8 or Later installed
@@ -9,7 +9,7 @@ A CLI Tool dedicated to hosting a Endpoint Server for GitHub Webhooks related to
 - Docker is Installed (For GitHub Action Runners)
 
 # Installation
-There are multiple ways of installing this tool and using it. Common methods are to Download the Self-Contained Builds, Install it from NuGet or Cloning it from GitHub.
+The tool can be installed by downloading the Self-Contained Builds, Install it from NuGet or Cloning it from GitHub.
 
 ## Download Self Contained Build
 Go to the [``Release``](https://github.com/Nano-DNA-Studios/GitHubSelfRunner/releases) Page of the Repository and Download the Tools Version with the Features you want for your Target Platform and OS.
